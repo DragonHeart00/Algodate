@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "393615644469",
+    "firebase_url": "https://algodating.firebaseio.com",
+    "project_id": "algodating",
+    "storage_bucket": "algodating.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:393615644469:android:6e3e7622d9d8774a7b5e7c",
+        "android_client_info": {
+          "package_name": "com.example.chatapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "393615644469-gf0u3tv45cp9sjt9lhvjuujnrljt4no9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.chatapp",
+            "certificate_hash": "d2659e8a0454c11c8a001cd7cd2944a25d736183"
+          }
+        },
+        {
+          "client_id": "393615644469-9ktablbe3rn61sqhn1h6gn3lm7fhnjg9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjUM-WpyfB3ikCNw88nI2kB2YkuyebDL4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "393615644469-9ktablbe3rn61sqhn1h6gn3lm7fhnjg9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
