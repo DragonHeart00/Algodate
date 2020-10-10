@@ -42,20 +42,28 @@ public class MainActivity extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
         checkUserSex();
+
+
         al = new ArrayList<>();
-        al.add("php");
+
+
+
+       /* al.add("php");
         al.add("c");
         al.add("python");
         al.add("java");
         al.add("html");
         al.add("c++");
         al.add("css");
-        al.add("javascript");
+        al.add("javascript");*/
 
 
 
 
         arrayAdapter = new ArrayAdapter<>(this, R.layout.item, R.id.helloText, al );
+
+
+
         SwipeFlingAdapterView flingContainer = findViewById(R.id.frame);
 
         flingContainer.setAdapter(arrayAdapter);
@@ -66,6 +74,8 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("LIST", "removed object!");
                 al.remove(0);
                 arrayAdapter.notifyDataSetChanged();
+
+
             }
 
             @Override
@@ -175,10 +185,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 if (snapshot.exists()){
+                    al.add(snapshot.child("name").getValue().toString());
 
-                  al.add("PHP");
-                  al.add(snapshot.child("name").getValue().toString());
-                  arrayAdapter.notifyDataSetChanged();
+                    arrayAdapter.notifyDataSetChanged();
                 }
             }
             @Override
