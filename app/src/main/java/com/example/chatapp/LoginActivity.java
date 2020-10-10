@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -50,19 +51,30 @@ public class LoginActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final String mEmail = email.getText().toString();
-                final String mPassword = password.getText().toString();
-                firebaseAuth.signInWithEmailAndPassword(mEmail,mPassword).
-                        addOnCompleteListener(LoginActivity.this,
-                                new OnCompleteListener<AuthResult>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<AuthResult> task) {
-                                        if (!task.isSuccessful()){
-                                            Toast.makeText(LoginActivity.this,"sign up error!", Toast.LENGTH_SHORT).show();
-                                        }
+                String str = email.getText().toString();
+                if (TextUtils.isEmpty(str)) {
+                    email.setError("missed me!");
+                    return;
+                }else {
 
-                                    }
-                                });
+
+                    final String mEmail = email.getText().toString();
+                    final String mPassword = password.getText().toString();
+                    firebaseAuth.signInWithEmailAndPassword(mEmail, mPassword).
+                            addOnCompleteListener(LoginActivity.this,
+                                    new OnCompleteListener<AuthResult>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<AuthResult> task) {
+                                            if (!task.isSuccessful()) {
+                                                Toast.makeText(LoginActivity.this, "sign up error!", Toast.LENGTH_SHORT).show();
+                                            }
+
+                                        }
+                                    });
+
+
+                }
+
             }
         });
     }
