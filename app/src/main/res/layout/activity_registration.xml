@@ -9,10 +9,9 @@
     android:orientation="vertical">
 
 
-
     <LinearLayout
-        android:layout_width="376dp"
-        android:layout_height="280dp"
+        android:layout_width="371dp"
+        android:layout_height="500dp"
         android:background="@drawable/empty_tall_divider"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -20,8 +19,6 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
-
         <TextView
             android:layout_width="325dp"
             android:layout_height="40dp"
@@ -32,28 +29,68 @@
             android:textSize="30dp"
             android:textStyle="bold" />
 
-
         <EditText
+            android:id="@+id/name"
             android:layout_width="325dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/solid"
-            android:hint=" Email"
-            android:id="@+id/email"/>
+            android:hint=" Name" />
+
 
         <EditText
+            android:id="@+id/email"
             android:layout_width="325dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/solid"
-            android:hint=" Password"
-            android:id="@+id/password"/>
+            android:hint=" Email" />
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="325dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/solid"
+            android:hint=" Password" />
+
+
+        <RadioGroup
+            android:id="@+id/radio_group"
+            android:layout_width="151dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Male"
+                android:id="@+id/male"/>
+
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Female"
+                android:id="@+id/female"/>
+
+
+        </RadioGroup>
+
+
 
         <Button
+            android:id="@+id/registerbt"
             android:layout_width="325dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -62,9 +99,7 @@
             android:background="@drawable/bt_background"
             android:text="Register"
             android:textAllCaps="false"
-            android:textColor="#FFFFFF"
-            android:id="@+id/registerbt"/>
-
+            android:textColor="#FFFFFF" />
 
 
     </LinearLayout>
