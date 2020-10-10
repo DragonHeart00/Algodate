@@ -1,4 +1,4 @@
-package com.example.chatapp;
+package com.example.chatapp.activity;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -8,9 +8,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.chatapp.R;
+import com.example.chatapp.controller.DataAdapter;
+import com.example.chatapp.data.Card;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -21,59 +24,50 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-
-    private ArrayList<String> al;
-    private ArrayAdapter<String> arrayAdapter;
+    private Card card_data[];
+    private DataAdapter dataAdapter;
     private FirebaseAuth firebaseAuth;
+    private String currentUId;
+    private DatabaseReference userDB;
     private int i;
 
 
-// added the swipe cards from Dionysis Lorentzos (Github)
+    ListView listView;
+    List<Card> rowItms;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
-
+        userDB = FirebaseDatabase.getInstance().getReference().child("Users");
         firebaseAuth = FirebaseAuth.getInstance();
+        currentUId = firebaseAuth.getCurrentUser().getUid();
         checkUserSex();
 
 
-        al = new ArrayList<>();
+        rowItms = new ArrayList<Card>();
 
+        dataAdapter = new DataAdapter(this, R.layout.item, rowItms );
 
-
-       /* al.add("php");
-        al.add("c");
-        al.add("python");
-        al.add("java");
-        al.add("html");
-        al.add("c++");
-        al.add("css");
-        al.add("javascript");*/
-
-
-
-
-        arrayAdapter = new ArrayAdapter<>(this, R.layout.item, R.id.helloText, al );
 
 
 
         SwipeFlingAdapterView flingContainer = findViewById(R.id.frame);
 
-        flingContainer.setAdapter(arrayAdapter);
+        flingContainer.setAdapter(dataAdapter);
         flingContainer.setFlingListener(new SwipeFlingAdapterView.onFlingListener() {
             @Override
             public void removeFirstObjectInAdapter() {
                 // this is the simplest way to delete an object from the Adapter (/AdapterView)
                 Log.d("LIST", "removed object!");
-                al.remove(0);
-                arrayAdapter.notifyDataSetChanged();
+                rowItms.remove(0);
+                dataAdapter.notifyDataSetChanged();
 
 
             }
@@ -131,6 +125,7 @@ public class MainActivity extends AppCompatActivity {
                 if (snapshot.getKey().equals(user.getUid())){
                     userSex="Male";
                     oppositeUserSex="Female";
+                    userDB = userDB.child(oppositeUserSex);
                     getOppositeSexUsers();
 
                 }
@@ -156,6 +151,7 @@ public class MainActivity extends AppCompatActivity {
                 if (snapshot.getKey().equals(user.getUid())){
                     userSex="Female";
                     oppositeUserSex="Male";
+                    userDB = userDB.child(oppositeUserSex);
                     getOppositeSexUsers();
 
                 }
@@ -185,9 +181,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 if (snapshot.exists()){
-                    al.add(snapshot.child("name").getValue().toString());
-
-                    arrayAdapter.notifyDataSetChanged();
+                    Card card = new Card(snapshot.getKey(),snapshot.child("name").getValue().toString());
+                    rowItms.add(card);
+                    dataAdapter.notifyDataSetChanged();
                 }
             }
             @Override
